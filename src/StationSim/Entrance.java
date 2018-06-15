@@ -32,7 +32,7 @@ public class Entrance extends Agent {
     private int personSize;
     private int numPeople;
     private double buffer = 0.2;
-    private int entranceInterval; // How often are Person objects produced
+//    private int entranceInterval; // How often are Person objects produced
 
     // Exit for people agents to aim for
     private Exit exit;
@@ -41,7 +41,7 @@ public class Entrance extends Agent {
     public Entrance(int size, Double2D location, String name, int numPeople, int personSize, Exit exit,
                     double exitProb, int entranceInterval) {
         super(size, location, name);
-        this.entranceInterval = entranceInterval;
+        //this.entranceInterval = entranceInterval;
         this.personSize = personSize;
         this.size *= personSize;
         this.numPeople = numPeople;
@@ -61,9 +61,10 @@ public class Entrance extends Agent {
     @Override
     public void step(SimState state) {
         super.step(state);
+        Station station = (Station ) state;
 
         // First check if this is a Person generating step
-        if (station.schedule.getSteps() % entranceInterval == 0) {
+        if (station.schedule.getSteps() % station.getEntranceInterval() == 0) {
             // Set number of people to be generated
             int toEnter = numPeople;
             if (toEnter > size) {

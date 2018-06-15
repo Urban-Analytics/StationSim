@@ -25,7 +25,6 @@ import sim.util.Double2D;
 public class Person extends Agent {
     private static final long serialVersionUID = 1;
 
-    private Station station;
 
     public Exit exit;
     private double desiredSpeed;

@@ -31,6 +31,8 @@ public class Station extends SimState{
 
     private static final long serialVersionUID = 1;
 
+    private Experimenter experimenter; // For running experiments for the Transitions work
+
     // Representations of simulation space
     private double areaWidth = 200.0;
     private double areaHeight = 100.0;
@@ -41,14 +43,14 @@ public class Station extends SimState{
     public Continuous2D walls = new Continuous2D(1.0, areaWidth, areaHeight);
 
     // Default values for parameters
-    private int numPeople = 1500;
+    private int numPeople;
     private int numEntrances = 3;
     private int numExits = 2;
-    private double exitProb = 0.8;
+    private double exitProb = 0.5;
     private int exitInterval = 30;
-    private int entranceInterval = 5;
+    private int entranceInterval;
     private int entranceSize = 5;
-    private int exitSize = 5;
+    private int exitSize = 20;
     private int personSize = 1; // sort bug here
     public int addedCount;
     private boolean writeResults = false;
@@ -255,9 +257,11 @@ public class Station extends SimState{
         this.entranceInterval = entranceInterval;
     }
 
+    /*
     public Object domEntranceInterval() {
         return new Interval(1, 100);
     }
+    */
 
     public boolean hideEntranceInterval() {
         return hideParameters;
@@ -284,6 +288,11 @@ public class Station extends SimState{
         doorways.clear();
         walls.clear();
         addedCount = 0;
+
+        // For runnning experiments
+        this.experimenter = new Experimenter(this);
+        schedule.scheduleRepeating(this.experimenter, 1, 1.0);
+
         createWalls();
         createExits();
         createEntrances();
@@ -298,6 +307,7 @@ public class Station extends SimState{
         // Analysis and outputs from the model are contained in this agent
         analysis = new Analysis(this);
         schedule.scheduleRepeating(analysis, 3, 1.0);
+
     }
 
     /** Call appropriate analysis methods and cleans up
@@ -327,8 +337,8 @@ public class Station extends SimState{
             Double2D location = new Double2D(0, y);
             Entrance entrance =  new Entrance(
                     entranceSize, location, "Entrance: " + (i + 1),
-                    numPeople / numEntrances, personSize,
-                    (Exit) exits.getValue(random.nextInt(numExits)), exitProb, entranceInterval);
+                    this.getNumPeople() / numEntrances, personSize,
+                    (Exit) exits.getValue(random.nextInt(numExits)), exitProb, this.getEntranceInterval());
             doorways.setObjectLocation(entrance, location);
             schedule.scheduleRepeating(entrance, 2, 1.0);
             entrances.add(entrance);
