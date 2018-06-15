@@ -53,7 +53,7 @@ public class Station extends SimState{
     private int exitSize = 20;
     private int personSize = 1; // sort bug here
     public int addedCount;
-    private boolean writeResults = false;
+    private boolean writeResults = true;
 
     // Store  exit agents for passing to constructors
     private Bag exits;
