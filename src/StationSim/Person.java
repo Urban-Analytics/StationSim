@@ -25,6 +25,8 @@ import sim.util.Double2D;
 public class Person extends Agent {
     private static final long serialVersionUID = 1;
 
+    private static int IDCounter = 0;
+    private int ID ;
 
     public Exit exit;
     private double desiredSpeed;
@@ -35,6 +37,7 @@ public class Person extends Agent {
 
     public Person(int size, Double2D location, String name, Station station, Exit exit, double exitProb) {
         super(size, location, name);
+        this.ID = Person.IDCounter++;
         this.station = station;
         radius = size / 2.0;
         desiredSpeed = (Math.abs(station.random.nextGaussian()) + minSpeed) * speedMultilpler;
@@ -166,6 +169,14 @@ public class Person extends Agent {
     public double distanceToExit() {
         return getDistance(getLocation(), exit.getLocation());
 
+    }
+
+    /**
+     * Get this Person's unique identifier
+     * @return
+     */
+    public int getID() {
+        return this.ID;
     }
 
     /**

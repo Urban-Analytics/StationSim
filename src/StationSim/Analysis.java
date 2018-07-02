@@ -289,7 +289,7 @@ public class Analysis implements Steppable {
             person = (Person) people.get(i);
             row = Arrays.asList(
                     Long.toString(step),
-                    person.toString(),
+                    Integer.toString(person.getID()),
                     Double.toString(person.getLocation().getX()),
                     Double.toString(person.getLocation().getY()),
                     Double.toString(person.getCurrentSpeed()),
