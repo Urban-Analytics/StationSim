@@ -21,3 +21,5 @@ __pycache__/
 **/.idea/**/dynamic.xml
 **/.idea/**/uiDesigner.xml
 
+# Mac crap
+.DS_Store
