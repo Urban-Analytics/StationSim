@@ -91,9 +91,9 @@ public class Analysis implements Steppable {
             System.out.printf(".");
             writeAverageOccupancy();
             System.out.printf(".");
-            writeDataFrame(stateDataFrame, "state_data" + sysTime + ".txt");
+            writeDataFrame(stateDataFrame, "state_data" + sysTime + ".txt", " ");
             System.out.printf(".");
-            writeDataFrame(aggregateDataFrame, "aggregate_data" + sysTime + ".txt");
+            writeDataFrame(aggregateDataFrame, "aggregate_data" + sysTime + ".txt", " ");
             System.out.printf(".");
             station.finish();
             System.out.println("Finished!");
@@ -327,7 +327,7 @@ public class Analysis implements Steppable {
         );
     }
 
-    public void writeDataFrame(List<List<String>> dataFrame, String fileName) {
+    public void writeDataFrame(List<List<String>> dataFrame, String fileName, String delimiter) {
 
         String dirName = "simulation_outputs";
         File dir = new File(dirName);
@@ -342,7 +342,7 @@ public class Analysis implements Steppable {
                     "utf-8"));
 
             for (List<String> line : dataFrame) {
-                writer.write(String.join(",", line) + System.lineSeparator());
+                writer.write(String.join(delimiter, line) + System.lineSeparator());
             }
         } catch (IOException ex) {
             System.out.println("Error writing to file");
@@ -354,4 +354,12 @@ public class Analysis implements Steppable {
             }
         }
     }
+
+    /**
+     * Overloaded version that writes using a comma as a delimiter
+     */
+    public void writeDataFrame(List<List<String>> dataFrame, String fileName) {
+        this.writeDataFrame(dataFrame, fileName, ",");
+    }
+
 }

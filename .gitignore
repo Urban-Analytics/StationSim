@@ -2,6 +2,9 @@
 /simulation_outputs/*
 /R_scripts/plots/*
 
+# Build
+out/
+
 # Python
 __pycache__/
 .ipynb_checkpoints/
@@ -21,3 +24,5 @@ __pycache__/
 **/.idea/**/dynamic.xml
 **/.idea/**/uiDesigner.xml
 
+# Mac crap
+.DS_Store
