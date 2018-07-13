@@ -290,7 +290,7 @@ public class Station extends SimState{
         addedCount = 0;
 
         // For runnning experiments
-        this.experimenter = new Experimenter(this);
+        //this.experimenter = new Experimenter(this);
         schedule.scheduleRepeating(this.experimenter, 1, 1.0);
 
         createWalls();
