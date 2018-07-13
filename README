@@ -1,5 +1,0 @@
-A simple abstract model of a train station, with passengers entering from the left and exiting 
-on the right. Each Entrance has an exit randomly assigned for the people from that entrance to aim for. A parameter also determines how 
-likely a person is to head to their assigned exit. The speed of a person is randomly sampled from a distribution and people slow as they approach someone else. If people touch then a random movement is applied to them on the y-axis.
-
-R and python scripts are also included providing some analysis of the model.
